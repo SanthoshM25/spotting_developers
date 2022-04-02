@@ -8,7 +8,7 @@ import { auth, provider } from "../../firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const LogIn = () => {
-  const [data, setData] = useState({});
+  //   const [data, setData] = useState({});
   //   const [clicked, setClicked] = useState(false);
   //   //   const history = useHistory();
 
@@ -19,8 +19,9 @@ const LogIn = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        const user = result.user;
+        // const token = credential.accessToken;
+        // const user = result.user;
+        console.log(credential);
       })
       .catch((error) => {
         // Handle Errors here.
