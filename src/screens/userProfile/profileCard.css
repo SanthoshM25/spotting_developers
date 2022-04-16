@@ -1,0 +1,36 @@
+.profile-screen-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.project-card:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+/*
+.card-wrapper {
+  width: auto;
+  border: 2px solid;
+  border-radius: 1em;
+  padding: 3em;
+}
+.skills-container {
+  overflow: scroll;
+  display: flex;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.skills-container::-webkit-scrollbar {
+  display: none;
+}
+
+.skills {
+  padding: 0.4em;
+  margin: 0.2em;
+  border: 1px solid black;
+  border-radius: 0.8em;
+} */

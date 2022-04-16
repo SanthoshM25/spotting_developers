@@ -1,0 +1,24 @@
+.card-wrapper {
+  border: 2px solid;
+  border-radius: 1em;
+  margin: 1em;
+  padding: 3em;
+  width: 50%;
+}
+.skills-container {
+  overflow: scroll;
+  display: flex;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.skills-container::-webkit-scrollbar {
+  display: none;
+}
+
+.skills {
+  padding: 0.4em;
+  margin: 0.2em;
+  border: 1px solid black;
+  border-radius: 0.8em;
+}

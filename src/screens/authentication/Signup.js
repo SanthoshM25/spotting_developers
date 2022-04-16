@@ -39,10 +39,6 @@ const Signup = () => {
   };
 
   useEffect(() => {
-    //   const mail = localStorage.getItem("mail");
-    //   if (mail) {
-    //     history.replace("/");
-    //   }
     navigator.geolocation.getCurrentPosition(function (position) {
       console.log(position);
     });

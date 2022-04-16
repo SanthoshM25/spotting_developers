@@ -1,0 +1,25 @@
+const skills = [
+  { id: 1, label: "Akka", value: "Akka" },
+  { id: 2, label: "Alpine.js", value: "Alpine.js" },
+  { id: 3, label: "Angular", value: "Angular" },
+  { id: 4, label: "AWS", value: "AWS" },
+  { id: 5, label: "Bootstrap", value: "Bootstrap" },
+  { id: 6, label: "C", value: "C" },
+  { id: 7, label: "C++", value: "C++" },
+  { id: 8, label: "C#", value: "C#" },
+  { id: 9, label: "Chakra UI", value: "Chakra UI" },
+  { id: 10, label: "Dart", value: "Dart" },
+  { id: 11, label: "Docker", value: "Docker" },
+  { id: 12, label: "Ember.js", value: "Ember.js" },
+  { id: 13, label: "Flutter", value: "Flutter" },
+  { id: 14, label: "Fast API", value: "Fast API" },
+  { id: 15, label: "Go", value: "Go" },
+  { id: 16, label: "Gatsby js", value: "Gatsby" },
+  { id: 17, label: "Jest", value: "Jest" },
+  { id: 18, label: "Java", value: "Java" },
+  { id: 19, label: "JavaScript", value: "JavaScript" },
+  { id: 20, label: "Jquery", value: "Jquery" },
+  { id: 21, label: "Kubernetes", value: "Kubernetes" },
+];
+
+export default skills;

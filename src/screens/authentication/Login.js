@@ -1,100 +1,82 @@
-import { useState, useEffect } from "react";
 import "./login.css";
-// import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { auth, provider } from "../../firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import axios from "axios";
 
 const LogIn = () => {
-  //   const [data, setData] = useState({});
-  //   const [clicked, setClicked] = useState(false);
-  //   //   const history = useHistory();
+  const navigate = useNavigate();
+  const [data, setData] = useState();
 
-  //   const handleChange = (e) => {
-  //     setData({ ...data, [e.target.name]: e.target.value });
-  //   };
   const handleSubmit = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         // const token = credential.accessToken;
         // const user = result.user;
-        console.log(credential);
+        console.log(result.user);
+        axios
+          .post(`${process.env.REACT_APP_API_URL}/auth/login`, {
+            email: result.user.email,
+          })
+          .then((response) => {
+            console.log(response.data.token);
+            if (response.data.token) {
+              console.log(result.user.email, response.data.token);
+              localStorage.setItem("token", response.data.token);
+              navigate("/");
+            } else {
+              setData({
+                ...data,
+                name: result.user.displayName,
+                email: result.user.email,
+                profileImgUrl: result.user.photoURL,
+              });
+              navigate("/userdetails", {
+                state: {
+                  ...data,
+                  name: result.user.displayName,
+                  email: result.user.email,
+                  profileImgUrl: result.user.photoURL,
+                },
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            alert("Something went wrong!");
+          });
       })
       .catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
-        // The email of the user's account used.
         const email = error.email;
-        // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
+        console.log(errorCode, errorMessage);
       });
-
-    //     toast.info("logging in please wait!");
-    //     setClicked(true);
-    // axios
-    //   .post(`${process.env.REACT_APP_BASE_URL}/signin`, data)
-    //   .then((res) => {
-    //     if (res.data.message === "Email/Password wrong") {
-    //       toast.error("enter valid details");
-    //       setClicked(false);
-    //     } else {
-    //       toast.success("logged in successfully");
-    //       sessionStorage.setItem("mail", res.data.data.email);
-    //       sessionStorage.setItem("id", res.data.data.id);
-    //       history.replace("/");
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     toast.error("something went wrong");
-    //     setClicked(false);
-    //   });
   };
-
-  //   useEffect(() => {
-  //     const mail = localStorage.getItem("mail");
-  //     if (mail) {
-  //       history.replace("/");
-  //     }
-  //   }, []);
+  useEffect(() => {
+    if (localStorage.getItem("token")) navigate("/");
+    else {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setData({
+          ...data,
+          Location: `${position.coords.latitude} ${position.coords.longitude}`,
+        });
+      });
+    }
+  }, []);
 
   return (
     <div className="signup-container">
       <main className="form ">
-        <header className="signup-header">LOG IN</header>
-        {/* <input
-          type="email"
-          className="input"
-          name="email"
-          placeholder="email"
-          value={data.email}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          className="input"
-          name="password"
-          placeholder="password"
-          value={data.password}
-          onChange={handleChange}
-        /> */}
-        <button
-          className="submit-btn"
-          onClick={handleSubmit}
-          //   disabled={clicked}
-        >
-          Sign in with Google
+        <header className="signup-header">SPOTTING DEVELOPERS</header>
+        <button className="submit-btn" onClick={handleSubmit}>
+          SignUp/Login with Google
         </button>
-        <p>
-          New user?{" "}
-          {/* <Link className="signin-text" to="/signup">
-            register
-          </Link> */}
-        </p>
       </main>
     </div>
   );
