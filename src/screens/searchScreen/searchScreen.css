@@ -1,0 +1,11 @@
+.search-input {
+  margin: 10px 5px;
+  width: 97%;
+  padding: 0.5em;
+  border-radius: 10px;
+}
+
+.search-selector-container {
+  display: flex;
+  justify-content: center;
+}

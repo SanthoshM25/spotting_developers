@@ -3,11 +3,13 @@ import React, { useEffect, useState } from "react";
 
 import "./profileCard.css";
 import { Card } from "antd";
+import Bottomnav from "../../components/BottomNav";
 const { Meta } = Card;
 
-export default function ({ token }) {
+export default function () {
   const [userData, setUserData] = useState();
   const [projectData, setProjectData] = useState();
+  const [devtoData, setDevtoData] = useState();
   const [githubData, setGithubData] = useState();
 
   useEffect(() => {
@@ -41,7 +43,24 @@ export default function ({ token }) {
       )
       .then((response) => {
         console.log(response);
-        setGithubData(response.data.projects);
+        setGithubData(response.data.projects.filter((project, i) => i < 3));
+      })
+      .catch((err) => console.log(err));
+
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/blog/user/devto`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        response.data.blogs &&
+          setDevtoData(response.data.blogs.filter((blog, i) => i < 3));
       })
       .catch((err) => console.log(err));
   }, []);
@@ -51,21 +70,26 @@ export default function ({ token }) {
       {userData && (
         <Card
           hoverable
-          style={{ textAlign: "center", width: "50%" }}
+          style={{ textAlign: "center", width: "50%", margin: 5 }}
           cover={<img alt="user image" src={userData.profileImgUrl} />}
         >
           <Meta title={userData.Name} description={userData.Email} />
         </Card>
       )}
 
-      <Card size="small" style={{ width: "50%" }}>
+      <Card size="small" style={{ width: "50%", margin: 5 }}>
         <Meta title="PROJECTS" style={{ textAlign: "center" }} />
         {projectData &&
           projectData.map((project, i) => (
             <Card style={{ margin: 15 }} className="project-card">
-              <h3>{project.Name}</h3>
-              <p>{project.Description}</p>
-              <p>{project.Language}</p>
+              <a
+                style={{ textDecoration: "none", color: "black" }}
+                href={`https://github.com/${project.Full_name}`}
+              >
+                <h3>{project.Name}</h3>
+                <p>{project.Description}</p>
+                <p>{project.Language}</p>
+              </a>
             </Card>
           ))}
       </Card>
@@ -82,17 +106,18 @@ export default function ({ token }) {
           ))}
         </div>
       )} */}
-      <Card size="small" style={{ width: "50%" }}>
+      <Card size="small" style={{ width: "50%", margin: 5 }}>
         <Meta title="BLOGS" style={{ textAlign: "center" }} />
-        {/* {projectData &&
-          projectData.map((project, i) => (
+        {devtoData &&
+          devtoData.map((blog, i) => (
+            //todo: wrapp with a anchor tag to point devto website
             <Card style={{ margin: 15 }} className="project-card">
-              <h3>{project.Name}</h3>
-              <p>{project.Description}</p>
-              <p>{project.Language}</p>
+              <h3>{blog.Name}</h3>
+              <p>{blog.Description}</p>
             </Card>
-          ))} */}
+          ))}
       </Card>
+      <Bottomnav tab="account" />
     </div>
   );
 }

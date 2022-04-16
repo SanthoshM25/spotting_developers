@@ -1,11 +1,11 @@
 import "./card.css";
 import { useNavigate } from "react-router-dom";
 
-const Card = (props) => {
+const UserCard = (props) => {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    navigate("/user");
+    // navigate("/user");
   };
 
   return (
@@ -21,4 +21,4 @@ const Card = (props) => {
     </div>
   );
 };
-export default Card;
+export default UserCard;
