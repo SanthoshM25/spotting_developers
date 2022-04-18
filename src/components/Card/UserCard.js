@@ -10,7 +10,14 @@ const UserCard = (props) => {
 
   return (
     <div className="card-wrapper" onClick={handleSubmit}>
-      <img src={props.data.profileImgUrl} alt="user profile" />
+      <img
+        src="https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar-600x600.png"
+        alt="user profile"
+        style={{
+          height: 100,
+          width: 100,
+        }}
+      />
       <h4>{props.data.name}</h4>
       <p>{props.data.bio}</p>
       <div className="skills-container">
