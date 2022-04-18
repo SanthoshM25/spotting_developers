@@ -5,7 +5,7 @@ const UserCard = (props) => {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    // navigate("/user");
+    navigate(`/user/${props.data.id}`);
   };
 
   return (

@@ -44,6 +44,7 @@ export default function HomeScreen() {
               bio: user.Description,
               skills: user.Skills,
               image: user.profileImageUrl,
+              id: user._id,
             }}
           />
         ))}

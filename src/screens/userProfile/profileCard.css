@@ -10,6 +10,16 @@
   transform: scale(1.05);
 }
 
+.blog-p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-decoration: none;
+  color: black;
+}
+
 /*
 .card-wrapper {
   width: auto;

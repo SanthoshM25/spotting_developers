@@ -92,32 +92,34 @@ export default function SearchScreen() {
           Search
         </Button>
       </div>
-      {/* {console.log(searchResult.length)}
-      {searchResult.length > 0 &&
-        searchResult.map((project, i) => (
-          <Card style={{ margin: 15 }} className="project-card">
-            <a
-              style={{ textDecoration: "none", color: "black" }}
-              href={`https://github.com/${project.Full_name}`}
-            >
-              <h3>{project.Name}</h3>
-              <p>{project.Description}</p>
-              <p>{project.Language}</p>
-            </a>
-          </Card>
-        ))} */}
-      {searchResult.length > 0 &&
+      {console.log(searchResult.length)}
+      {searchValue.searchType === "project" ||
+        (searchValue.searchType === "blog" &&
+          searchResult.length > 0 &&
+          searchResult.map((project, i) => (
+            <Card style={{ margin: 15 }} className="project-card">
+              <a
+                style={{ textDecoration: "none", color: "black" }}
+                href={`https://github.com/${project.Full_name}`}
+              >
+                <h3>{project.Name}</h3>
+                <p>{project.Description}</p>
+                <p>{project.Language}</p>
+              </a>
+            </Card>
+          )))}
+      {/* {searchValue.searchType === "user" && searchResult.length > 0 &&
         searchResult.map((user, i) => (
           <UserCard
             key={i}
             data={{
               name: user.Name,
               bio: user.Description,
-              skills: user.Skills,
-              image: user.profileImageUrl,
+              // skills: user.Skills,
+              // image: user.profileImageUrl,
             }}
           />
-        ))}
+        ))} */}
       <Bottomnav tab="search" />
     </div>
   );
