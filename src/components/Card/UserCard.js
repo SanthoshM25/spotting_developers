@@ -25,7 +25,7 @@ const UserCard = (props) => {
           <p className="skills">{skill}</p>
         ))}
       </div>
-      <div>
+      {/* <div>
         {props.data.score && (
           <div style={{ display: "flex", justifyContent: "space-around" }}>
             <div className="score-pill">
@@ -38,7 +38,7 @@ const UserCard = (props) => {
             </div>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

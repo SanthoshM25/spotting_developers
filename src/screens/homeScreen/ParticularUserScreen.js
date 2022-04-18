@@ -110,6 +110,21 @@ export default function () {
             </Card>
           ))}
       </Card>
+
+      <div style={{ marginTop: 5 }}>
+        {userData && userData.score && (
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <div className="score-pill">
+              <p>Blog score</p>
+              <p>{`${userData.score.blogscore} - ${userData.score.blogCount}`}</p>
+            </div>
+            <div className="score-pill">
+              <p>Project score</p>
+              <p>{`${userData.score.projectscore} - ${userData.score.projectCount}`}</p>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
