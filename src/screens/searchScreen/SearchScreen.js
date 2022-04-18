@@ -93,21 +93,21 @@ export default function SearchScreen() {
         </Button>
       </div>
       {console.log(searchResult.length)}
-      {searchValue.searchType === "project" ||
-        (searchValue.searchType === "blog" &&
-          searchResult.length > 0 &&
-          searchResult.map((project, i) => (
-            <Card style={{ margin: 15 }} className="project-card">
-              <a
-                style={{ textDecoration: "none", color: "black" }}
-                href={`https://github.com/${project.Full_name}`}
-              >
-                <h3>{project.Name}</h3>
-                <p>{project.Description}</p>
-                <p>{project.Language}</p>
-              </a>
-            </Card>
-          )))}
+      {(searchValue.searchType === "project" ||
+        searchValue.searchType === "blog") &&
+        searchResult.length > 0 &&
+        searchResult.map((project, i) => (
+          <Card style={{ margin: 15 }} className="project-card">
+            <a
+              style={{ textDecoration: "none", color: "black" }}
+              href={`https://github.com/${project.Full_name}`}
+            >
+              <h3>{project.Name}</h3>
+              <p>{project.Description}</p>
+              <p>{project.Language}</p>
+            </a>
+          </Card>
+        ))}
       {/* {searchValue.searchType === "user" && searchResult.length > 0 &&
         searchResult.map((user, i) => (
           <UserCard
