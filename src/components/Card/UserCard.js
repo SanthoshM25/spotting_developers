@@ -18,6 +18,20 @@ const UserCard = (props) => {
           <p className="skills">{skill}</p>
         ))}
       </div>
+      <div>
+        {props.data.score && (
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <div className="score-pill">
+              <p>Blog score</p>
+              <p>{`${props.data.score.blogscore} - ${props.data.score.blogCount}`}</p>
+            </div>
+            <div className="score-pill">
+              <p>Project score</p>
+              <p>{`${props.data.score.projectscore} - ${props.data.score.projectCount}`}</p>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

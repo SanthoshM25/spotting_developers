@@ -22,3 +22,10 @@
   border: 1px solid black;
   border-radius: 0.8em;
 }
+
+.score-pill {
+  border: 1px solid black;
+  padding: 2px;
+  margin: 5px;
+  border-radius: 10px;
+}

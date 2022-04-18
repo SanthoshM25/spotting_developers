@@ -45,6 +45,7 @@ export default function HomeScreen() {
               skills: user.Skills,
               image: user.profileImageUrl,
               id: user._id,
+              score: user.score,
             }}
           />
         ))}
