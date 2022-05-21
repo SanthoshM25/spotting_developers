@@ -23,6 +23,9 @@ const Bottomnav = ({ tab }) => {
       case "search":
         navigate("/search");
         break;
+      case "messages":
+        navigate("/messages");
+        break;
       case "account":
         navigate("/account");
         break;
@@ -61,6 +64,22 @@ const Bottomnav = ({ tab }) => {
             size="35"
             color="#000"
             onClick={() => setActiveTabs("search")}
+          />
+        )}
+      </div>
+
+      <div className="bn-tab">
+        {activeTabs === "messages" ? (
+          <RiSearchEyeFill
+            size="35"
+            color="#000"
+            onClick={() => setActiveTabs("messages")}
+          />
+        ) : (
+          <BiSearchAlt
+            size="35"
+            color="#000"
+            onClick={() => setActiveTabs("messages")}
           />
         )}
       </div>

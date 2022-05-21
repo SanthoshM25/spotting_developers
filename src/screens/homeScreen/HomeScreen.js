@@ -27,8 +27,14 @@ export default function HomeScreen() {
           }
         )
         .then((response) => {
-          console.log(response);
-          setUsers(response.data.data);
+          if (
+            response.data.err &&
+            response.data.err.message === "jwt expired"
+          ) {
+            alert("session expired");
+            localStorage.removeItem("token");
+            navigate("/authentication");
+          } else setUsers(response.data.data);
         })
         .catch((err) => console.log(err));
     }

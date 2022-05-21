@@ -8,6 +8,7 @@ import ProfileCard from "./screens/userProfile/ProfileCard";
 import "antd/dist/antd.css";
 import SearchScreen from "./screens/searchScreen/SearchScreen";
 import ParticularUserScreen from "./screens/homeScreen/ParticularUserScreen";
+import MessageScreen from "./screens/messagingScreen/Message";
 function App() {
   return (
     <div style={{ backgroundColor: "#F3F1F5", minHeight: "100vh" }}>
@@ -18,6 +19,7 @@ function App() {
           <Route path="/userdetails" element={<UserDetails />} />
           <Route path="/account" element={<ProfileCard />} />
           <Route path="/search" element={<SearchScreen />} />
+          <Route path="/messages" element={<MessageScreen />} />
           <Route path="/user/:id" element={<ParticularUserScreen />} />
         </Routes>
       </BrowserRouter>
