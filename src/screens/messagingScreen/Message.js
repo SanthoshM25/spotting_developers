@@ -1,37 +1,51 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Bottomnav from "../../components/BottomNav";
 import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { Card } from "antd";
+import { useNavigate } from "react-router-dom";
+import "./message.css";
 
 export default function MessageScreen() {
+  const [chats, setChats] = useState([]);
+  const navigate = useNavigate();
   const chat = [];
+
   const fetchChats = async () => {
     const docSnap = await getDocs(collection(db, "chats"));
-    docSnap.forEach((doc) => chat.push(doc.data()));
+    docSnap.forEach((doc) => {
+      console.log(doc.data());
+      if (doc.data().users.includes(localStorage.getItem("name")))
+        chat.push({ ...doc.data(), id: doc.id });
+    });
     console.log(chat);
+    setChats(chat);
   };
+
+  const handleClick = (data) => {
+    data.users.map((user) => {
+      if (user !== localStorage.getItem("name"))
+        navigate(`/chat/${user}/${data.id}`);
+    });
+  };
+
   useEffect(() => {
     fetchChats();
   }, []);
   return (
     <div>
-      {chat.map((data) => (
-        <ul>
-          <li>
-            {/* <img
-              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg"
-              alt=""
-            /> */}
-            <div>
-              <h2>Prénom Nom</h2>
-              <h3>
-                <span class="status orange"></span>
-                offline
-              </h3>
-            </div>
-          </li>
-        </ul>
-      ))}
+      {chats.length > 0 &&
+        chats.map((data) => {
+          return (
+            <Card onClick={() => handleClick(data)} className="userMsgCard">
+              {data.users.map((user) => {
+                if (user !== localStorage.getItem("name")) {
+                  return <h2>{user}</h2>;
+                }
+              })}
+            </Card>
+          );
+        })}
       <Bottomnav tab="messages" />
     </div>
   );

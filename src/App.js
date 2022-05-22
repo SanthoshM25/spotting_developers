@@ -9,6 +9,8 @@ import "antd/dist/antd.css";
 import SearchScreen from "./screens/searchScreen/SearchScreen";
 import ParticularUserScreen from "./screens/homeScreen/ParticularUserScreen";
 import MessageScreen from "./screens/messagingScreen/Message";
+import Chat from "./screens/messagingScreen/Chat";
+
 function App() {
   return (
     <div style={{ backgroundColor: "#F3F1F5", minHeight: "100vh" }}>
@@ -21,6 +23,7 @@ function App() {
           <Route path="/search" element={<SearchScreen />} />
           <Route path="/messages" element={<MessageScreen />} />
           <Route path="/user/:id" element={<ParticularUserScreen />} />
+          <Route path="/chat/:name/:id" element={<Chat />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,13 +1,37 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { db } from "../../firebase";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import "../userProfile/profileCard.css";
 import { Card } from "antd";
 const { Meta } = Card;
 
 export default function () {
   const [userData, setUserData] = useState();
+  const navigate = useNavigate();
   const { id } = useParams();
+
+  const handleMessage = async () => {
+    let id = 0;
+    await getDocs(collection(db, "chats")).then((res) => {
+      res.forEach((data) => {
+        if (
+          data.data().users.includes(localStorage.getItem("name")) &&
+          data.data().users.includes(userData.data.Name)
+        ) {
+          id = data.id;
+        }
+      });
+    });
+    if (id === 0) {
+      await addDoc(collection(db, "chats"), {
+        messages: [],
+        users: [localStorage.getItem("name"), userData.data.Name],
+      }).then((res) => (id = res.id));
+    }
+    navigate(`/chat/${userData.data.Name}/${id}`);
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -125,6 +149,9 @@ export default function () {
           </div>
         )}
       </div>
+      <button className="msg-btn" onClick={handleMessage}>
+        Message
+      </button>
     </div>
   );
 }

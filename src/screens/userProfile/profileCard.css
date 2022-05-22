@@ -27,6 +27,16 @@
   border-radius: 10px;
 }
 
+.msg-btn {
+  background-color: rgb(79, 120, 207);
+  color: white;
+  border: 0px;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  position: sticky;
+  bottom: 0;
+}
+
 /*
 .card-wrapper {
   width: auto;

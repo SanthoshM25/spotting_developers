@@ -24,8 +24,10 @@ const LogIn = () => {
           .then((response) => {
             console.log(response.data.token);
             if (response.data.token) {
+              console.log(response.data);
               console.log(result.user.email, response.data.token);
               localStorage.setItem("token", response.data.token);
+              localStorage.setItem("name", response.data.name);
               navigate("/");
             } else {
               setData({

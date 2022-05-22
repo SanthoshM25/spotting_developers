@@ -1,0 +1,15 @@
+.userMsgCard {
+  border: 1px solid gray;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7em;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background-color: white;
+  z-index: 100;
+}
