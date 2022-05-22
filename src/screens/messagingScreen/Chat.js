@@ -45,16 +45,32 @@ export default function Chat() {
   return (
     <div style={{ position: "relative", height: "100vh" }}>
       <div>
-        {messages.map((msg) => (
-          <div>
-            <h2>{msg.message}</h2>
-            <p>{msg.sentBy}</p>
-          </div>
-        ))}
+        {messages.map((msg) => {
+          const userName = localStorage.getItem("name");
+          if (msg.sentBy === userName) {
+            return (
+              <div className="userSent msg-pill">
+                <h2>{msg.message}</h2>
+              </div>
+            );
+          } else {
+            return (
+              <div className="chatterSent msg-pill">
+                <h2>{msg.message}</h2>
+              </div>
+            );
+          }
+        })}
       </div>
       <div className="input-container">
-        <input type="text" value={newMessage} onChange={handleOnChange} />
-        <button onClick={handleSubmit} disabled={!newMessage}>
+        <input
+          type="text"
+          className="input"
+          placeholder="Message here"
+          value={newMessage}
+          onChange={handleOnChange}
+        />
+        <button className="btn" onClick={handleSubmit} disabled={!newMessage}>
           send
         </button>
       </div>

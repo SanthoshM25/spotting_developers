@@ -82,6 +82,7 @@ export default function ProfileCard() {
       )
       .then((response) => {
         console.log(response.data);
+        alert("Added successfully");
       })
       .catch((err) => console.log(err));
   };
@@ -100,6 +101,7 @@ export default function ProfileCard() {
       )
       .then((response) => {
         console.log(response.data);
+        alert("Removed successfully");
       })
       .catch((err) => console.log(err));
   };

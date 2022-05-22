@@ -44,6 +44,7 @@ const LogIn = () => {
                   profileImgUrl: result.user.photoURL,
                 },
               });
+              localStorage.setItem("name", result.user.displayName);
             }
           })
           .catch((err) => {
