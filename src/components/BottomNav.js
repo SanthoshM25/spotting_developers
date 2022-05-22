@@ -8,9 +8,10 @@ import {
   RiUser5Fill,
   RiSearchEyeFill,
 } from "react-icons/ri";
-import { BiSearchAlt } from "react-icons/bi";
+import { BiSearchAlt, BiMessageRoundedDots } from "react-icons/bi";
 import { BsPersonFill } from "react-icons/bs";
 import { RiUser5Line } from "react-icons/ri";
+import { AiFillMessage } from "react-icons/ai";
 
 const Bottomnav = ({ tab }) => {
   const navigate = useNavigate();
@@ -70,13 +71,13 @@ const Bottomnav = ({ tab }) => {
 
       <div className="bn-tab">
         {activeTabs === "messages" ? (
-          <RiSearchEyeFill
+          <AiFillMessage
             size="35"
             color="#000"
             onClick={() => setActiveTabs("messages")}
           />
         ) : (
-          <BiSearchAlt
+          <BiMessageRoundedDots
             size="35"
             color="#000"
             onClick={() => setActiveTabs("messages")}

@@ -12,6 +12,7 @@ const { Title, Text, Link, Paragraph } = Typography;
 
 export default function ParticularUserScreen() {
   const [userData, setUserData] = useState();
+  const [mediumData, setMediumData] = useState();
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -51,6 +52,21 @@ export default function ParticularUserScreen() {
       .then((response) => {
         console.log(response.data);
         setUserData(response.data);
+      })
+      .catch((err) => console.log(err));
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/blog/user/medium/posts`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        setMediumData(response.data.result);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -135,7 +151,6 @@ export default function ParticularUserScreen() {
           title="BLOGS"
           style={{
             textAlign: "center",
-            backgroundColor: "#8EF6C9",
             borderRadius: "20px",
             margin: "5px",
           }}
@@ -149,6 +164,7 @@ export default function ParticularUserScreen() {
                 style={{
                   margin: 5,
                   borderRadius: "20px",
+                  backgroundColor: "#8EF6C9",
                 }}
                 className="project-card"
               >
@@ -167,6 +183,49 @@ export default function ParticularUserScreen() {
             //     <p className="blog-p">{blog.description}</p>
             //   </a>
             // </Card>
+          })}
+      </Card>
+      <Card
+        size="medium"
+        style={{
+          width: "50%",
+          margin: 5,
+          borderRadius: "20px",
+        }}
+      >
+        <Meta
+          title="MEDIUM BLOGS"
+          style={{
+            textAlign: "center",
+            borderRadius: "20px",
+            margin: "5px",
+          }}
+        />
+        {mediumData &&
+          mediumData.map((blog, i) => {
+            console.log(blog);
+            return (
+              <Card
+                style={{
+                  margin: 5,
+                  borderRadius: "20px",
+                  backgroundColor: "#8EF6C9",
+                  textAlign: "center",
+                }}
+                className="project-card"
+              >
+                <a href={blog.link}>
+                  <img
+                    src={blog.thumbnail}
+                    style={{
+                      width: "100%",
+                      height: "70%",
+                    }}
+                  />
+                  <Title level={4}>{blog.title}</Title>
+                </a>
+              </Card>
+            );
           })}
       </Card>
 
