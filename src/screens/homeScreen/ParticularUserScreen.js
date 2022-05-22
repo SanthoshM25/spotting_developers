@@ -1,9 +1,12 @@
+import { Typography } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../userProfile/profileCard.css";
 import { Card } from "antd";
 const { Meta } = Card;
+
+const { Title, Text, Link } = Typography;
 
 export default function () {
   const [userData, setUserData] = useState();
@@ -29,28 +32,52 @@ export default function () {
   }, []);
 
   return (
-    <div className="profile-screen-wrapper">
+    <div
+      className="profile-screen-wrapper"
+      style={{ backgroundColor: "#0EAD69" }}
+    >
       {userData && userData.data && (
         <Card
           hoverable
-          style={{ textAlign: "center", width: "50%", margin: 5 }}
+          style={{
+            textAlign: "center",
+            width: "50%",
+            margin: 5,
+            borderRadius: "20px",
+          }}
           cover={<img alt="user image" src={userData.data.profileImgUrl} />}
         >
           <Meta title={userData.data.Name} description={userData.data.Email} />
         </Card>
       )}
 
-      <Card size="small" style={{ width: "50%", margin: 5 }}>
+      <Card
+        size="small"
+        style={{
+          width: "50%",
+          margin: 5,
+
+          borderRadius: "20px",
+        }}
+      >
         <Meta title="PROJECTS" style={{ textAlign: "center" }} />
         {userData &&
           userData.projects &&
           userData.projects.map((project, i) => (
-            <Card style={{ margin: 15 }} className="project-card">
+            <Card
+              style={{ margin: 15, borderRadius: "20px" }}
+              className="project-card"
+              style={{
+                backgroundColor: "#8EF6C9",
+                borderRadius: "20px",
+                margin: "5px",
+              }}
+            >
               <a
                 style={{ textDecoration: "none", color: "black" }}
                 href={`https://github.com/${project.Full_name}`}
               >
-                <h3>{project.Name}</h3>
+                <Text strong>{project.Name}</Text>
                 <p>{project.Description}</p>
                 <p>{project.Language}</p>
               </a>
@@ -70,12 +97,27 @@ export default function () {
           ))}
         </div>
       )} */}
-      <Card size="small" style={{ width: "50%", margin: 5 }}>
+      <Card
+        size="small"
+        style={{
+          width: "50%",
+          margin: 5,
+          borderRadius: "20px",
+        }}
+      >
         <Meta title="BLOGS" style={{ textAlign: "center" }} />
         {userData &&
           userData.blog &&
           userData.blog.map((blog, i) => (
-            <Card style={{ margin: 5 }} className="project-card">
+            <Card
+              style={{ margin: 5, borderRadius: "20px" }}
+              className="project-card"
+              style={{
+                backgroundColor: "#8EF6C9",
+                borderRadius: "20px",
+                margin: "5px",
+              }}
+            >
               <a href={blog.url}>
                 <h3>{blog.Title}</h3>
                 <p className="blog-p">{blog.Description}</p>
@@ -84,29 +126,63 @@ export default function () {
           ))}
       </Card>
 
-      <Card size="small" style={{ width: "50%", margin: 5 }}>
+      <Card
+        size="small"
+        style={{
+          width: "50%",
+          margin: 5,
+
+          borderRadius: "20px",
+        }}
+      >
         <Meta title="EDUCATION" style={{ textAlign: "center" }} />
         {userData &&
           userData.data &&
           userData.data.Education.map((education, i) => (
-            <Card style={{ margin: 5 }} className="project-card">
+            <Card
+              style={{
+                margin: 5,
+                borderRadius: "20px",
+                borderRadius: "20px",
+                margin: "5px",
+                backgroundColor: "#8EF6C9",
+              }}
+              className="project-card"
+            >
+              <Title>{education.Degree}</Title>
               <h3>{education.Institution}</h3>
-              <h4>{education.Degree}</h4>
               <p>{`${education.StartYear} - ${education.EndYear}`}</p>
             </Card>
           ))}
       </Card>
 
-      <Card size="small" style={{ width: "50%", margin: 5 }}>
+      <Card
+        size="small"
+        style={{
+          width: "50%",
+          margin: 5,
+
+          borderRadius: "20px",
+        }}
+      >
         <Meta title="EXPERIENCE" style={{ textAlign: "center" }} />
         {userData &&
-          userData.data &&
+          userData.data.Experience &&
           userData.data.Experience.map((experience, i) => (
-            <Card style={{ margin: 5 }} className="project-card">
-              <h3>{experience.CompanyName}</h3>
-              <h4>{experience.Position}</h4>
+            <Card
+              style={{
+                margin: 5,
+                borderRadius: "20px",
+                borderRadius: "20px",
+                margin: "5px",
+                backgroundColor: "#8EF6C9",
+              }}
+              className="project-card"
+            >
+              <Title>{experience.CompanyName}</Title>
+              <h4>Position:{experience.Position}</h4>
               <p>{experience.Description}</p>
-              <p>{`${experience.Duration} Months`}</p>
+              <p>Duration:{`${experience.Duration} Months`}</p>
             </Card>
           ))}
       </Card>

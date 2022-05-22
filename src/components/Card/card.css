@@ -1,9 +1,10 @@
 .card-wrapper {
-  border: 2px solid;
-  border-radius: 1em;
+  /* border: 2px solid; */
+  /* border-radius: 1em; */
   margin: 1em;
   padding: 3em;
-  width: 50%;
+  /* display: flex; */
+  width: 300px;
 }
 .skills-container {
   overflow: scroll;
@@ -19,13 +20,13 @@
 .skills {
   padding: 0.4em;
   margin: 0.2em;
-  border: 1px solid black;
-  border-radius: 0.8em;
+  /* border: 1px solid black; */
+  /* border-radius: 0.8em; */
 }
 
 .score-pill {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 2px;
   margin: 5px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }

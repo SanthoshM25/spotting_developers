@@ -106,7 +106,7 @@ export default function UserDetails() {
   };
 
   return (
-    <div className="userDetails-wrapper">
+    <div className="userDetails-wrapper" style={{ backgroundColor: "#0EAD69" }}>
       <p>Select Skills</p>
       <div className="skill-container">
         {selected.map((skill) => (
