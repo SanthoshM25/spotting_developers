@@ -1,11 +1,15 @@
 .search-input {
+  display: flex;
+  justify-content: center;
   margin: 10px 5px;
   width: 97%;
   padding: 0.5em;
+  border: 1px solid black;
   border-radius: 10px;
 }
 
 .search-selector-container {
   display: flex;
   justify-content: center;
+  padding-bottom: 100px;
 }

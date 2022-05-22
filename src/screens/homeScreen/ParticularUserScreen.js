@@ -6,9 +6,9 @@ import "../userProfile/profileCard.css";
 import { Card } from "antd";
 const { Meta } = Card;
 
-const { Title, Text, Link } = Typography;
+const { Title, Text, Link, Paragraph } = Typography;
 
-export default function () {
+export default function ParticularUserScreen() {
   const [userData, setUserData] = useState();
   const { id } = useParams();
 
@@ -41,7 +41,7 @@ export default function () {
           hoverable
           style={{
             textAlign: "center",
-            width: "50%",
+            width: "30%",
             margin: 5,
             borderRadius: "20px",
           }}
@@ -56,7 +56,6 @@ export default function () {
         style={{
           width: "50%",
           margin: 5,
-
           borderRadius: "20px",
         }}
       >
@@ -69,8 +68,6 @@ export default function () {
                 margin: 15,
                 borderRadius: "20px",
                 backgroundColor: "#8EF6C9",
-                borderRadius: "20px",
-                margin: "5px",
               }}
               className="project-card"
             >
@@ -78,10 +75,14 @@ export default function () {
                 style={{ textDecoration: "none", color: "black" }}
                 href={`https://github.com/${project.Full_name}`}
               >
-                <Text strong>{project.Name}</Text>
-                <p>{project.Description}</p>
-                <p>{project.Language}</p>
+                <Title level={2}>{project.Name}</Title>
               </a>
+              <Paragraph ellipsis={5}>
+                Description ~
+                {project.Description == undefined
+                  ? "..."
+                  : `  ${project.Description}`}
+              </Paragraph>
             </Card>
           ))}
       </Card>
@@ -99,7 +100,7 @@ export default function () {
         </div>
       )} */}
       <Card
-        size="small"
+        size="medium"
         style={{
           width: "50%",
           margin: 5,
@@ -117,17 +118,32 @@ export default function () {
         />
         {userData &&
           userData.blog &&
-          userData.blog.map((blog, i) => (
-            <Card
-              style={{ margin: 5, borderRadius: "20px" }}
-              className="project-card"
-            >
-              <a href={blog.url}>
-                <h3>{blog.Title}</h3>
-                <p className="blog-p">{blog.Description}</p>
-              </a>
-            </Card>
-          ))}
+          userData.blog.map((blog, i) => {
+            console.log(blog);
+            return (
+              <Card
+                style={{
+                  margin: 5,
+                  borderRadius: "20px",
+                }}
+                className="project-card"
+              >
+                <a href={blog.url}>
+                  <Title level={4}>{blog.Title}</Title>
+                  <p className="blog-p">{blog.Description}</p>
+                </a>
+              </Card>
+            );
+            // <Card
+            //   style={{ margin: 5, borderRadius: "20px" }}
+            //   className="project-card"
+            // >
+            //   <a href={blog.url}>
+            //     <h3>{blog.title}</h3>
+            //     <p className="blog-p">{blog.description}</p>
+            //   </a>
+            // </Card>
+          })}
       </Card>
 
       <Card

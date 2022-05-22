@@ -24,7 +24,7 @@ export default function HomeScreen() {
       const token = localStorage.getItem("token");
       axios
         .post(
-          `${process.env.REACT_APP_API_URL}/get/user/all`,
+          `${process.env.REACT_APP_API_URL}/user/user/search`,
           {},
           {
             headers: {
@@ -47,7 +47,7 @@ export default function HomeScreen() {
         })
         .catch((err) => console.log(err));
     }
-  }, []);
+  });
   return (
     <div className="home-container" style={{ backgroundColor: "#0EAD69" }}>
       <Title level={1} underline style={{ padding: "100px" }}>

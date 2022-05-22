@@ -7,8 +7,9 @@ import { Card } from "antd";
 import Bottomnav from "../../components/BottomNav";
 const { Meta } = Card;
 const { Title, Text, Link } = Typography;
+const { Paragraph } = Typography;
 
-export default function () {
+export default function ProfileCard() {
   const [userData, setUserData] = useState();
   const [projectData, setProjectData] = useState();
   const [devtoData, setDevtoData] = useState();
@@ -30,7 +31,7 @@ export default function () {
         console.log(response.data);
         setUserData(response.data.data);
         setProjectData(response.data.projects);
-        console.log(projectData);
+        console.log(projectData, response.data.projects);
       })
       .catch((err) => console.log(err));
 
@@ -62,8 +63,7 @@ export default function () {
       )
       .then((response) => {
         console.log(response.data);
-        response.data.blogs &&
-          setDevtoData(response.data.blogs.filter((blog, i) => i < 3));
+        response.data.blogs && setDevtoData(response.data.blogs);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -86,6 +86,60 @@ export default function () {
       .catch((err) => console.log(err));
   };
 
+  const onClickProjectRemoveHandler = (id) => {
+    const token = localStorage.getItem("token");
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/project/user/remove`,
+        { Github_id: id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const onClickBlogHandler = (id) => {
+    const token = localStorage.getItem("token");
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/blog/user/create`,
+        { Blog_id: id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const onClickBlogRemoveHandler = (id) => {
+    const token = localStorage.getItem("token");
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/blog/user/remove`,
+        { Blog_id: id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div
       className="profile-screen-wrapper"
@@ -96,11 +150,19 @@ export default function () {
           hoverable
           style={{
             textAlign: "center",
-            width: "50%",
+
+            width: "30%",
             margin: 5,
             borderRadius: "20px",
           }}
-          cover={<img alt="user image" src={userData.profileImgUrl} />}
+          cover={
+            <img
+              src={userData.profileImgUrl}
+              onClick={(e) => {
+                console.log(e);
+              }}
+            />
+          }
         >
           <Meta title={userData.Name} description={userData.Email} />
         </Card>
@@ -108,7 +170,11 @@ export default function () {
 
       <Card
         size="small"
-        style={{ width: "50%", margin: 5, borderRadius: "20px" }}
+        style={{
+          width: "95%",
+          margin: 5,
+          borderRadius: "20px",
+        }}
       >
         <Meta title="PROJECTS" style={{ textAlign: "center" }} />
         {projectData &&
@@ -118,21 +184,33 @@ export default function () {
                 margin: 15,
                 borderRadius: "20px",
                 backgroundColor: "#8EF6C9",
+                display: "inline-block",
+                height: "200px",
+                width: "300px",
               }}
               className="project-card"
             >
               <a
                 style={{ textDecoration: "none", color: "black" }}
-                href={`https://github.com/${project.Full_name}`}
+                href={`https://github.com/${project.full_name}`}
               >
-                <Title level={3}>{project.Name}</Title>
+                <Title level={4}>{project.name}</Title>
               </a>
-              <p>{project.Description}</p>
-              <Text
-                underline
-                onClick={() => onClickProjectHandler(project.Github_id)}
-              >
+              <Paragraph ellipsis={1}>
+                Description ~
+                {project.description === undefined
+                  ? "..."
+                  : `  ${project.description}`}
+              </Paragraph>
+              <Text underline onClick={() => onClickProjectHandler(project.id)}>
                 click to ShowCase
+              </Text>
+              <Text
+                style={{ margin: "25px" }}
+                underline
+                onClick={() => onClickProjectRemoveHandler(project.id)}
+              >
+                click to Remove
               </Text>
             </Card>
           ))}
@@ -152,19 +230,69 @@ export default function () {
       )} */}
       <Card
         size="small"
-        style={{ width: "50%", margin: 5, borderRadius: "20px" }}
+        style={{
+          width: "95%",
+          margin: 5,
+          borderRadius: "20px",
+          justifyContent: "center",
+        }}
       >
         <Meta title="BLOGS" style={{ textAlign: "center" }} />
         {devtoData &&
           devtoData.map((blog, i) => (
-            //todo: wrapp with a anchor tag to point devto website
             <Card
-              style={{ margin: 15, borderRadius: "20px" }}
+              style={{
+                margin: 5,
+                borderRadius: "20px",
+                display: "inline-block",
+                height: "200px",
+                width: "300px",
+              }}
               className="project-card"
             >
-              <h3>{blog.Name}</h3>
-              <p>{blog.Description}</p>
+              <a href={blog.url}>
+                <Title level={4}>{blog.title}</Title>
+                <p className="blog-p">{blog.description}</p>
+              </a>
+              <Text underline onClick={() => onClickBlogHandler(blog.id)}>
+                click to ShowCase
+              </Text>
+              <Text
+                style={{ margin: "25px" }}
+                underline
+                onClick={() => onClickBlogRemoveHandler(blog.id)}
+              >
+                click to Remove
+              </Text>
             </Card>
+
+            // <Card
+            //   style={{ margin: 15, borderRadius: "20px" }}
+            //   className="project-card"
+            // >
+            //   <a
+            //     style={{ textDecoration: "none", color: "black" }}
+            //     href={""}
+            //   >
+            //     <Title level={3}>{blog.Name}</Title>
+            //   </a>
+            //   <p>{blog.Description}</p>
+            //   <Text
+            //     underline
+            //     onClick={() => onClickProjectHandler(blog.Github_id)}
+            //   >
+            //     click to ShowCase
+            //   </Text>
+            //   <Text
+            //     style={{ margin: "25px" }}
+            //     underline
+            //     onClick={() => onClickProjectRemoveHandler(blog._id)}
+            //   >
+            //     click to Remove
+            //   </Text>
+            //   <h3>{blog.Name}</h3>
+            //   <p>{blog.Description}</p>
+            // </Card>
           ))}
       </Card>
       <Bottomnav tab="account" />

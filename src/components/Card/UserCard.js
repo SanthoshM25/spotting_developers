@@ -62,11 +62,12 @@ const UserCard = (props) => {
           </span>
         </p>
         <div className="skills-container">
-          {props.data.skills.map((skill) => (
-            <Text mark className="skills">
-              {skill}
-            </Text>
-          ))}
+          {props.data.skills &&
+            props.data.skills.map((skill) => (
+              <Text mark className="skills">
+                {skill}
+              </Text>
+            ))}
         </div>
 
         {props.data.score && (
