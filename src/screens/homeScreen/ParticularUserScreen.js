@@ -65,13 +65,14 @@ export default function () {
           userData.projects &&
           userData.projects.map((project, i) => (
             <Card
-              style={{ margin: 15, borderRadius: "20px" }}
-              className="project-card"
               style={{
+                margin: 15,
+                borderRadius: "20px",
                 backgroundColor: "#8EF6C9",
                 borderRadius: "20px",
                 margin: "5px",
               }}
+              className="project-card"
             >
               <a
                 style={{ textDecoration: "none", color: "black" }}
@@ -105,18 +106,21 @@ export default function () {
           borderRadius: "20px",
         }}
       >
-        <Meta title="BLOGS" style={{ textAlign: "center" }} />
+        <Meta
+          title="BLOGS"
+          style={{
+            textAlign: "center",
+            backgroundColor: "#8EF6C9",
+            borderRadius: "20px",
+            margin: "5px",
+          }}
+        />
         {userData &&
           userData.blog &&
           userData.blog.map((blog, i) => (
             <Card
               style={{ margin: 5, borderRadius: "20px" }}
               className="project-card"
-              style={{
-                backgroundColor: "#8EF6C9",
-                borderRadius: "20px",
-                margin: "5px",
-              }}
             >
               <a href={blog.url}>
                 <h3>{blog.Title}</h3>
