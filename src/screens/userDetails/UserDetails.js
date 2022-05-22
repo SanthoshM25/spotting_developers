@@ -85,6 +85,7 @@ export default function UserDetails() {
       ...educationDetails,
       ...experienceDetails,
     });
+    console.log(userData);
     axios
       .post(`${process.env.REACT_APP_API_URL}/auth/register`, {
         ...state,
@@ -106,7 +107,7 @@ export default function UserDetails() {
   };
 
   return (
-    <div className="userDetails-wrapper">
+    <div className="userDetails-wrapper" style={{ backgroundColor: "#0EAD69" }}>
       <p>Select Skills</p>
       <div className="skill-container">
         {selected.map((skill) => (
@@ -141,7 +142,7 @@ export default function UserDetails() {
           className="input-field"
         />
         <input
-          placeholder="DOB ex: 05 Mar 2002"
+          placeholder="DOB ex: 05-05-2002"
           name="Dob"
           onChange={handleChange}
           className="input-field"
@@ -168,7 +169,7 @@ export default function UserDetails() {
             className="input-field"
           />
           <input
-            placeholder="Start Year Ex: 12 Mar 2017"
+            placeholder="Start Year Ex: 2017"
             value={education.StartYear}
             name="StartYear"
             onChange={(e) =>
@@ -177,7 +178,7 @@ export default function UserDetails() {
             className="input-field"
           />
           <input
-            placeholder="End Year Ex: 12 Mar 2020"
+            placeholder="End Year Ex: 2020"
             value={education.EndYear}
             name="EndYear"
             onChange={(e) =>

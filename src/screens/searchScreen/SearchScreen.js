@@ -5,7 +5,8 @@ import { Button, Select, Card } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import axios from "axios";
 import UserCard from "../../components/Card/UserCard";
-
+import { Typography } from "antd";
+const { Title, Text, Link } = Typography;
 const { Option } = Select;
 
 export default function SearchScreen() {
@@ -80,7 +81,7 @@ export default function SearchScreen() {
       <div className="search-selector-container">
         <Select
           defaultValue="user"
-          //   style={{ width: "20%" }}
+          style={{ width: "20%" }}
           onChange={handleChange}
         >
           <Option value="user">User</Option>
@@ -97,29 +98,71 @@ export default function SearchScreen() {
         searchValue.searchType === "blog") &&
         searchResult.length > 0 &&
         searchResult.map((project, i) => (
-          <Card style={{ margin: 15 }} className="project-card">
+          <Card
+            style={{
+              margin: 15,
+              borderRadius: "20px",
+              backgroundColor: "#8EF6C9",
+            }}
+            className="project-card"
+          >
             <a
               style={{ textDecoration: "none", color: "black" }}
               href={`https://github.com/${project.Full_name}`}
             >
-              <h3>{project.Name}</h3>
-              <p>{project.Description}</p>
-              <p>{project.Language}</p>
+              <Title level={3}>{project.Name}</Title>
             </a>
+            <p>{project.Description}</p>
+            {/* <Text
+              underline
+              onClick={() => onClickProjectHandler(project.Github_id)}
+            >
+              click to ShowCase
+            </Text> */}
           </Card>
+          // <Card style={{ margin: 15 }} className="project-card">
+          //   <a
+          //     style={{ textDecoration: "none", color: "black" }}
+          //     href={`https://github.com/${project.Full_name}`}
+          //   >
+          //     <h3>{project.Name}</h3>
+          //     <p>{project.Description}</p>
+          //     <p>{project.Language}</p>
+          //   </a>
+          // </Card>
         ))}
-      {/* {searchValue.searchType === "user" && searchResult.length > 0 &&
+      {searchValue.searchType === "user" &&
+        searchResult.length > 0 &&
         searchResult.map((user, i) => (
           <UserCard
             key={i}
             data={{
+              status: user.status,
               name: user.Name,
               bio: user.Description,
-              // skills: user.Skills,
-              // image: user.profileImageUrl,
+              skills: user.Skills,
+              image: user.profileImgUrl,
+              id: user._id,
+              score: user.Score.score,
             }}
           />
-        ))} */}
+        ))}
+      {searchValue.searchType === "skill" &&
+        searchResult.length > 0 &&
+        searchResult.map((user, i) => (
+          <UserCard
+            key={i}
+            data={{
+              status: user.status,
+              name: user.Name,
+              bio: user.Description,
+              skills: user.Skills,
+              image: user.profileImgUrl,
+              id: user._id,
+              score: user.Score.score,
+            }}
+          />
+        ))}
       <Bottomnav tab="search" />
     </div>
   );
