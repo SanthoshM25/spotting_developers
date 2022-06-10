@@ -5,6 +5,7 @@ import { db } from "../../firebase";
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 
 import { onSnapshot } from "firebase/firestore";
+import { Card } from "antd";
 
 export default function Chat() {
   const { name: chatter, id } = useParams();
@@ -44,6 +45,9 @@ export default function Chat() {
 
   return (
     <div style={{ position: "relative", height: "100vh" }}>
+      <Card style={{ textAlign: "center" }}>
+        <h2>{chatter}</h2>
+      </Card>
       <div>
         {messages.map((msg) => {
           const userName = localStorage.getItem("name");
