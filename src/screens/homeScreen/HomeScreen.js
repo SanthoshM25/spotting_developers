@@ -47,7 +47,7 @@ export default function HomeScreen() {
         })
         .catch((err) => console.log(err));
     }
-  });
+  }, []);
   return (
     <div className="home-container" style={{ backgroundColor: "#0EAD69" }}>
       <Title level={1} underline style={{ padding: "100px" }}>

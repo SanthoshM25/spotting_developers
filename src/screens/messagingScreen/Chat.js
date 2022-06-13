@@ -45,8 +45,11 @@ export default function Chat() {
 
   return (
     <div style={{ position: "relative", height: "100vh" }}>
-      <Card style={{ textAlign: "center" }}>
-        <h2>{chatter}</h2>
+      <Card style={{ display: "flex", flexDirection: "row" }}>
+        <button>back</button>
+        <div style={{ textAlign: "center" }}>
+          <h2>{chatter}</h2>
+        </div>
       </Card>
       <div>
         {messages.map((msg) => {

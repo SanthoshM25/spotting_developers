@@ -22,7 +22,7 @@ const LogIn = () => {
             email: result.user.email,
           })
           .then((response) => {
-            console.log(response.data.token);
+            console.log("token: ", response.data.token);
             if (response.data.token) {
               console.log(response.data);
               console.log(result.user.email, response.data.token);
@@ -38,7 +38,7 @@ const LogIn = () => {
               });
               navigate("/userdetails", {
                 state: {
-                  ...data,
+                  location: data.Location,
                   name: result.user.displayName,
                   email: result.user.email,
                   profileImgUrl: result.user.photoURL,
@@ -69,6 +69,7 @@ const LogIn = () => {
           ...data,
           Location: `${position.coords.latitude} ${position.coords.longitude}`,
         });
+        console.log(position.coords);
       });
     }
   }, []);

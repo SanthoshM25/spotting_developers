@@ -31,6 +31,7 @@ export default function UserDetails() {
     },
   ]);
   const { state } = useLocation();
+  console.log(state);
 
   const handleChange = (e) => {
     setTempData({ ...tempData, [e.target.name]: e.target.value });
@@ -85,7 +86,7 @@ export default function UserDetails() {
       ...educationDetails,
       ...experienceDetails,
     });
-    console.log(userData);
+    // console.log(userData);
     axios
       .post(`${process.env.REACT_APP_API_URL}/auth/register`, {
         ...state,
